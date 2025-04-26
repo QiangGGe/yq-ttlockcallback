@@ -14,7 +14,10 @@ app.use(logger);
 
 // 首页
 app.get("/", async (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.send({
+    code: 0,
+    data: 'hellow yangqin',
+  });
 });
 
 // 更新计数
