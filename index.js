@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
 const logger = morgan("tiny");
 const cloud = require('wx-server-sdk');
+cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV }) // 使用当前云环境
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
