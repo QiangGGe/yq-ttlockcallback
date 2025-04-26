@@ -16,7 +16,7 @@ app.use(logger);
 // 首页
 app.get("/", async (req, res) => {
   try {
-    const result = await cloud.callFunction({name:'getBanner'})
+    const result = await cloud.callFunction({name:'getBanner',data:{}})
   res.send({
     code: 0,
     data: {title:'hellow yangqin',result},
