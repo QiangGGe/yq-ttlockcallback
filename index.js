@@ -3,8 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
-
 const logger = morgan("tiny");
+const cloud = require('wx-server-sdk');
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -14,9 +14,10 @@ app.use(logger);
 
 // 首页
 app.get("/", async (req, res) => {
+ const result = await cloud.callFunction({name:'getBanner'})
   res.send({
     code: 0,
-    data: 'hellow yangqin',
+    data: {title:'hellow yangqin',result},
   });
 });
 
