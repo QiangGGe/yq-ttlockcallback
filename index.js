@@ -4,8 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
 const logger = morgan("tiny");
-const cloud = require('wx-server-sdk');
-cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV }) // 使用当前云环境
+const axios = require('axios');
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -15,15 +14,27 @@ app.use(logger);
 
 // 首页
 app.get("/", async (req, res) => {
+  const CLOUD_FUNCTION_URL = 'https://122.51.155.47';
+
   try {
-    const result = await cloud.callFunction({name:'getBanner',data:{}})
-  res.send({
-    code: 0,
-    data: {title:'hellow yangqin',result},
-  });
+    const response = await axios.post(CLOUD_FUNCTION_URL, {
+      data: { key: "value" }, // 传递给云函数的参数
+    });
+    console.log("云函数返回:", response.data);
   } catch (error) {
-    console.log('yangqin error==>',error);
+    console.error("调用云函数失败:", error.response?.data || error.message);
   }
+
+  // try {
+
+  //   const result = await cloud.callFunction({name:'getBanner',data:{}})
+  // res.send({
+  //   code: 0,
+  //   data: {title:'hellow yangqin',result},
+  // });
+  // } catch (error) {
+  //   console.log('yangqin error==>',error);
+  // }
  
 });
 app.post("/",async(req,res)=>{
