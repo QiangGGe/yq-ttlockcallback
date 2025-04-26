@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
 const logger = morgan("tiny");
 const cloud = require('wx-server-sdk');
-const { warn } = require("console");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
