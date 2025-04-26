@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const { init: initDB, Counter } = require("./db");
 const logger = morgan("tiny");
 const cloud = require('wx-server-sdk');
+const { warn } = require("console");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -20,7 +21,15 @@ app.get("/", async (req, res) => {
     data: {title:'hellow yangqin',result},
   });
 });
+app.post("/",async(req,res)=>{
+  const reuslt = await cloud.callFunction({name:'TTLockCallback',data:res});
+  res.send({
+    code:0,
+    data:reuslt
+  })
+})
 
+//下面都是模版的内容 可以参考学习
 // 更新计数
 app.post("/api/count", async (req, res) => {
   const { action } = req.body;
