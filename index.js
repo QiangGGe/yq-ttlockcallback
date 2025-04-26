@@ -14,18 +14,28 @@ app.use(logger);
 
 // 首页
 app.get("/", async (req, res) => {
- const result = await cloud.callFunction({name:'getBanner'})
+  try {
+    const result = await cloud.callFunction({name:'getBanner'})
   res.send({
     code: 0,
     data: {title:'hellow yangqin',result},
   });
+  } catch (error) {
+    console.log('yangqin error==>',error);
+  }
+ 
 });
 app.post("/",async(req,res)=>{
-  const reuslt = await cloud.callFunction({name:'TTLockCallback',data:res});
+  try {
+    const reuslt = await cloud.callFunction({name:'TTLockCallback',data:res});
   res.send({
     code:0,
     data:reuslt
   })
+  } catch (error) {
+    console.log('yangqin error==>',error);
+  }
+  
 })
 
 //下面都是模版的内容 可以参考学习
