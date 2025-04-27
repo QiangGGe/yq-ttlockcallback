@@ -37,16 +37,21 @@ app.get("/", async (req, res) => {
   // }
  
 });
+
 app.post("/",async(req,res)=>{
-  try {
-    const reuslt = await cloud.callFunction({name:'TTLockCallback',data:res});
   res.send({
-    code:0,
-    data:reuslt
-  })
-  } catch (error) {
-    console.log('yangqin error==>',error);
-  }
+    code: 0,
+    data: {title:'hellow yangqin'},
+  });
+  // try {
+  //   const reuslt = await cloud.callFunction({name:'TTLockCallback',data:res});
+  // res.send({
+  //   code:0,
+  //   data:reuslt
+  // })
+  // } catch (error) {
+  //   console.log('yangqin error==>',error);
+  // }
   
 })
 
