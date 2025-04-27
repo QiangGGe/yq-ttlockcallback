@@ -39,6 +39,9 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/",async(req,res)=>{
+  console.log('====req==>',req);
+  console.log('====res==>',res);
+  
   res.send({
     code: 0,
     data: {title:'hellow yangqin'},
