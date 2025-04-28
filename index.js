@@ -34,9 +34,10 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/",async(req,res)=>{
+  console.log('===req==>',req);
   let URL = `https://api.weixin.qq.com/tcb/invokecloudfunction?env=${ENV}&name=TTLockCallback`;
   try {
-    const response = await axios.post(URL,{data:{req,res}});
+    const response = await axios.post(URL,{data:req.body});
     res.send({
       code: 0,
       data: 'success',
