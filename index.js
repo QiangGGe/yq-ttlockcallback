@@ -19,14 +19,19 @@ app.get("/", async (req, res) => {
 
   let URL = `https://api.weixin.qq.com/tcb/invokecloudfunction?env=${ENV}&name=getBanner`;
   console.log('=======URL====>',URL);
-  const response = await axios.get(URL);
-  console.log('=====response====>',response);
+  try {
+    const response = await axios.get(URL);
+    console.log('=====response====>',response);
+  } catch (error) {
+    console.log('======error==>',error);
+  }
+ 
 
  res.send({
     code: 0,
     data: {title:'hellow yangqin',response},
   });
-  
+
   // var c1 = new cloud.Cloud({
   //   resourceAppid: 'wx43041853dcd2e2de',
   //   resourceEnv: 'yq-release-5gaejr2bafeb56eb',
