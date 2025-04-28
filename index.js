@@ -21,17 +21,18 @@ app.get("/", async (req, res) => {
   console.log('=======URL====>',URL);
   try {
     const response = await axios.post(URL);
+    res.send({
+      code: 0,
+      data: {title:'hellow yangqin',data:response.data},
+    });
+  
     console.log('=====response====>',response);
   } catch (error) {
     console.log('======error==>',error);
   }
  
 
- res.send({
-    code: 0,
-    data: {title:'hellow yangqin',response},
-  });
-
+ 
   // var c1 = new cloud.Cloud({
   //   resourceAppid: 'wx43041853dcd2e2de',
   //   resourceEnv: 'yq-release-5gaejr2bafeb56eb',
