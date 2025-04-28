@@ -44,7 +44,6 @@ app.post("/",async(req,res)=>{
   } catch (error) {
     console.log('======error==>',error);
   }
-  
 })
 
 //下面都是模版的内容 可以参考学习
