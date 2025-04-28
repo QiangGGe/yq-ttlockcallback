@@ -6,6 +6,7 @@ const { init: initDB, Counter } = require("./db");
 const logger = morgan("tiny");
 const axios = require('axios');
 const cloud = require('wx-server-sdk');
+const ENV = 'yq-release-5gaejr2bafeb56eb';
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -16,15 +17,25 @@ app.use(logger);
 // 首页
 app.get("/", async (req, res) => {
 
-  var c1 = new cloud.Cloud({
-    resourceAppid: 'wx43041853dcd2e2de',
-    resourceEnv: 'yq-release-5gaejr2bafeb56eb',
+  let URL = `https://api.weixin.qq.com/tcb/invokecloudfunction?env=${ENV}&name=getBanner`;
+  console.log('=======URL====>',URL);
+  const response = await axios.get(URL);
+  console.log('=====response====>',response);
+
+ res.send({
+    code: 0,
+    data: {title:'hellow yangqin',response},
   });
-  await c1.init();
-  return await c1.callFunction({
-    name: 'getBanner',
-    data: {}, // 从外部传入的数据
-  });
+  
+  // var c1 = new cloud.Cloud({
+  //   resourceAppid: 'wx43041853dcd2e2de',
+  //   resourceEnv: 'yq-release-5gaejr2bafeb56eb',
+  // });
+  // await c1.init();
+  // return await c1.callFunction({
+  //   name: 'getBanner',
+  //   data: {}, // 从外部传入的数据
+  // });
   // const CLOUD_FUNCTION_URL = 'https://122.51.155.47';
 
   // try {
@@ -52,6 +63,8 @@ app.get("/", async (req, res) => {
 app.post("/",async(req,res)=>{
   console.log('====req==>',req);
   console.log('====res==>',res);
+
+
 
   res.send({
     code: 0,
