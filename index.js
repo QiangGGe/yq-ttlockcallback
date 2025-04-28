@@ -32,12 +32,19 @@ app.get("/", async (req, res) => {
   }
  
 });
-
+/**
+ * 通通锁的回调地址
+ * 因为通通锁只能一次性配置，但是微信的开放接口invokecloudfunction又需要token，而token时效只有2小时，所以只能通过云托管来免token请求
+ */
 app.post("/",async(req,res)=>{
   console.log('===req==>',req);
   let URL = `https://api.weixin.qq.com/tcb/invokecloudfunction?env=${ENV}&name=TTLockCallback`;
   try {
-    const response = await axios.post(URL,{data:req.body});
+    axios.post(URL,{data:req.body.records}).then(res=>{
+      console.log('===ttlockcallfunction==>',res);
+    }).catch(err=>{
+      throw err;
+    });
     res.send({
       code: 0,
       data: 'success',
