@@ -20,7 +20,7 @@ app.get("/", async (req, res) => {
   let URL = `https://api.weixin.qq.com/tcb/invokecloudfunction?env=${ENV}&name=getBanner`;
   console.log('=======URL====>',URL);
   try {
-    const response = await axios.get(URL);
+    const response = await axios.PORT(URL);
     console.log('=====response====>',response);
   } catch (error) {
     console.log('======error==>',error);
