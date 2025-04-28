@@ -31,60 +31,19 @@ app.get("/", async (req, res) => {
     console.log('======error==>',error);
   }
  
-
- 
-  // var c1 = new cloud.Cloud({
-  //   resourceAppid: 'wx43041853dcd2e2de',
-  //   resourceEnv: 'yq-release-5gaejr2bafeb56eb',
-  // });
-  // await c1.init();
-  // return await c1.callFunction({
-  //   name: 'getBanner',
-  //   data: {}, // 从外部传入的数据
-  // });
-  // const CLOUD_FUNCTION_URL = 'https://122.51.155.47';
-
-  // try {
-  //   const response = await axios.post(CLOUD_FUNCTION_URL, {
-  //     data: { key: "value" }, // 传递给云函数的参数
-  //   });
-  //   console.log("云函数返回:", response.data);
-  // } catch (error) {
-  //   console.error("调用云函数失败:", error.response?.data || error.message);
-  // }
-
-  // try {
-
-  //   const result = await cloud.callFunction({name:'getBanner',data:{}})
-  // res.send({
-  //   code: 0,
-  //   data: {title:'hellow yangqin',result},
-  // });
-  // } catch (error) {
-  //   console.log('yangqin error==>',error);
-  // }
- 
 });
 
 app.post("/",async(req,res)=>{
-  console.log('====req==>',req);
-  console.log('====res==>',res);
-
-
-
-  res.send({
-    code: 0,
-    data: {title:'hellow yangqin'},
-  });
-  // try {
-  //   const reuslt = await cloud.callFunction({name:'TTLockCallback',data:res});
-  // res.send({
-  //   code:0,
-  //   data:reuslt
-  // })
-  // } catch (error) {
-  //   console.log('yangqin error==>',error);
-  // }
+  let URL = `https://api.weixin.qq.com/tcb/invokecloudfunction?env=${ENV}&name=TTLockCallback`;
+  try {
+    const response = await axios.post(URL,{data:response.data});
+    res.send({
+      code: 0,
+      data: 'success',
+    });
+  } catch (error) {
+    console.log('======error==>',error);
+  }
   
 })
 
